@@ -29,6 +29,8 @@ TEST_CASE("test game constructor"){
     //CHECK_THROWS(Game game2(player1,9));
     CHECK(player1.stacksize() == 26);
     CHECK(player2.stacksize() == 26);
+    CHECK(player1.cardesTaken() == 0);
+    CHECK(player2.cardesTaken() == 0);
 }
 TEST_CASE("test playturn"){
     Player player1("player1");
@@ -58,6 +60,15 @@ TEST_CASE("test playAll"){
     Player player2("player2");
     Game game(player1,player2);
     CHECK_NOTHROW(game.playAll());
+    int flag1=0,flag2=0,flag=0;
+    if(player1.cardesTaken() == 0 && player2.cardesTaken() == 56)
+        flag1=1;
+    if(player1.cardesTaken() == 56 && player2.cardesTaken() == 0)
+        flag2=1;
+    if( flag1 == 1 || flag2 == 1)
+        flag=1;
     //CHECK((player1.cardesTaken() == 0 && player2.cardesTaken() == 56)||(player1.cardesTaken() == 56 && player2.cardesTaken() == 0));
+    //CHECK(flag1 == 1|| flag2 == 1);
+    CHECK(flag == 1);
 }
 
